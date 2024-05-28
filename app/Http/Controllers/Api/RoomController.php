@@ -15,16 +15,20 @@ class RoomController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $rooms = Room::where('status', RoomStatus::Available)->get();
-
         return $this->sendResponse(RoomResource::collection($rooms), 'Rooms retrieved successfully.');
     }
 
 
+    /**
+     * book hotel room api request
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function book(Request $request): JsonResponse
     {
         try {
@@ -43,14 +47,14 @@ class RoomController extends BaseController
                 'status' => RoomStatus::Pending
             ]);
             $room->request()->create([
-               'status' => RoomStatus::Pending,
-               'user_id' => $request->user()->id,
-               'room_id' => $room->id
-           ]);
+                'status' => RoomStatus::Pending,
+                'user_id' => $request->user()->id,
+                'room_id' => $room->id
+            ]);
 
-            return $this->sendResponse( [],'Room book request sent successfully.');
+            return $this->sendResponse([], 'Room book request sent successfully.');
 
-        }Catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->sendError('Something went wrong.', ['error' => $e->getMessage()]);
         }
     }

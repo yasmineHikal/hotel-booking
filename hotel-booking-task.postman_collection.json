@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "5cc95a90-c79f-4a05-aa94-a9b835aa3bb2",
 		"name": "hotel-booking-task",
+		"description": "### API for hotel Booking management using Laravel and Sanctum",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "2563349",
 		"_collection_link": "https://cloudy-sunset-451442.postman.co/workspace/Team-Workspace~c7ffeddf-c496-4a6a-8177-bc8d2f6dca43/collection/2563349-5cc95a90-c79f-4a05-aa94-a9b835aa3bb2?action=share&source=collection_link&creator=2563349"
@@ -42,7 +43,7 @@
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
-						"url": "{{url}}/api/login"
+						"url": "hotel-booking.test/api/login"
 					},
 					"status": "Not Found",
 					"code": 404,
@@ -193,7 +194,7 @@
 						},
 						{
 							"key": "email",
-							"value": "yasmine2@gmail.com",
+							"value": "yasmine2@gmail.comjj",
 							"type": "text"
 						},
 						{
@@ -204,11 +205,6 @@
 						{
 							"key": "confirm_password",
 							"value": "password",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
 							"type": "text"
 						}
 					]
@@ -246,7 +242,7 @@
 								}
 							]
 						},
-						"url": "{{url}}/api/register"
+						"url": "hotel-booking.test/api/register"
 					},
 					"status": "Not Found",
 					"code": 404,
@@ -557,8 +553,21 @@
 		{
 			"name": "Rooms Listing",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "2|j6AtIzcHWq9GhnulvSivaGIKMUukLBWgbkdxaqeMb8f259b4"
+					}
+				},
 				"method": "GET",
-				"header": []
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "{{url}}/api/rooms"
 			},
 			"response": [
 				{
@@ -572,7 +581,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{url}}/api/rooms"
+						"url": "hotel-booking.test/api/rooms"
 					},
 					"status": "OK",
 					"code": 200,
@@ -700,8 +709,25 @@
 		{
 			"name": "Book Room",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "room_id",
+							"value": "9",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{url}}/api/book-room"
 			},
 			"response": [
 				{
@@ -725,7 +751,7 @@
 								}
 							]
 						},
-						"url": "{{url}}/api/book-room"
+						"url": "hotel-booking.test/api/book-room"
 					},
 					"status": "Not Found",
 					"code": 404,

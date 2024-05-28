@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +15,8 @@ class RegisterController extends BaseController
     /**
      * Register api
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function register(Request $request): JsonResponse
     {
@@ -27,7 +29,7 @@ class RegisterController extends BaseController
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return $this->sendError('Validation Error.', $validator->errors()->toArray());
             }
 
             $input = $request->all();
@@ -38,7 +40,7 @@ class RegisterController extends BaseController
             $success['name'] = $user->name;
 
             return $this->sendResponse($success, 'User register successfully.');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->sendError('Something went wrong.', ['error' => $e->getMessage()]);
         }
     }
@@ -46,7 +48,8 @@ class RegisterController extends BaseController
     /**
      * Login api
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function login(Request $request): JsonResponse
     {
@@ -60,7 +63,7 @@ class RegisterController extends BaseController
             } else {
                 return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->sendError('Something went wrong.', ['error' => $e->getMessage()]);
         }
     }
