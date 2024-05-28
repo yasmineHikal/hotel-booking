@@ -48,14 +48,19 @@
                                         <span class="badge text-bg-{{$room->type_colour}}">{{$room->type}}</span>
                                     </td>
                                     <td>
+                                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employee'))
                                         <livewire:change-room-status :room="$room"  :key="$room->id"/>
+                                        @else
+                                            <span class="badge text-bg-{{$room->status_colour}}">{{$room->status_name}}</span>
+                                        @endif
                                     </td>
                                     <td>
 
+                                        @role('client')
                                         <livewire:book-room :room="$room"  :key="$room->id"/>
+                                        @endrole
 
-
-                                        @if($room->request)
+                                        @if($room->request &&(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employee')))
                                         <livewire:client-request :request="$room->request" :key="$room->request->id" />
                                         @endif
 

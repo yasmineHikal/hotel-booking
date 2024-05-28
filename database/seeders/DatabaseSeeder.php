@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
       //  $this->call(RolesAndPermissionsSeeder::class);
-       // $this->call(UsersSeeder::class);
-        $this->call(RoomsSeeder::class);
+        $this->call(UsersSeeder::class);
+      //  $this->call(RoomsSeeder::class);
     }
 }

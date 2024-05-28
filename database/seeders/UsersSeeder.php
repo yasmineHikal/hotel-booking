@@ -26,6 +26,28 @@ class UsersSeeder  extends Seeder
                 $user->assignRole('Admin');
             });
 
+        User::create([
+            'name' => 'employee',
+            'email' => 'employee@admin.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),])
+            ->each(function ($user) {
+                $user->assignRole('employee');
+            });
+
+        User::create([
+            'name' => 'client',
+            'email' => 'client@client.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),])
+            ->each(function ($user) {
+                $user->assignRole('client');
+            });
+
+
+
 
     }
 }
