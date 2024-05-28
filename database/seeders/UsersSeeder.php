@@ -16,36 +16,28 @@ class UsersSeeder  extends Seeder
      */
     public function run()
     {
-        User::create([
+       $Admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),])
-            ->each(function ($user) {
-                $user->assignRole('Admin');
-            });
-
-        User::create([
+            'remember_token' => Str::random(10),]);
+        $Admin->assignRole('Admin');
+     $employee =   User::create([
             'name' => 'employee',
             'email' => 'employee@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),])
-            ->each(function ($user) {
-                $user->assignRole('employee');
-            });
+            'remember_token' => Str::random(10),]);
+        $employee->assignRole('employee');
 
-        User::create([
+      $client =  User::create([
             'name' => 'client',
             'email' => 'client@client.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),])
-            ->each(function ($user) {
-                $user->assignRole('client');
-            });
-
+            'remember_token' => Str::random(10),]);
+        $client->assignRole('client');
 
 
 
