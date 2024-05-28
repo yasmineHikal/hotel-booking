@@ -19,15 +19,16 @@ class Room extends Model
 
     public function getStatusNameAttribute()
     {
-        return  RoomStatus::fromValue($this->attributes['status'])->key;
+        return RoomStatus::fromValue($this->attributes['status'])->key;
 
     }
 
     public function getTypeAttribute()
     {
-        return  RoomType::fromValue($this->attributes['type'])->key;
+        return RoomType::fromValue($this->attributes['type'])->key;
 
     }
+
     public function getTypeColourAttribute()
     {
         return RoomType::fromValue($this->attributes['type'])->getColour($this->attributes['type']);

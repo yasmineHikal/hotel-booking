@@ -12,10 +12,12 @@ class RoomController extends Controller
 {
     /**
      * Display rooms listing.
+     * @param Request $request
+     * @return View
      */
     public function index(Request $request): View
     {
-        $rooms =  Room::query()
+        $rooms = Room::query()
             ->when(
                 $request->q,
                 function (Builder $builder) use ($request) {
@@ -26,7 +28,6 @@ class RoomController extends Controller
             'rooms' => $rooms,
         ]);
     }
-
 
 
 }

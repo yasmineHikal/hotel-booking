@@ -14,11 +14,13 @@ class Request extends Model
         'status',
         'user_id'];
 
-    public function room(){
+    public function room()
+    {
         return $this->belongsTo(Room::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

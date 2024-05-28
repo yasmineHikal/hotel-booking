@@ -15,11 +15,16 @@ class BookRoom extends Component
 
     public $room;
     public $roomStatus;
-
     public $buttonVisible = true;
-    #[On([ 'refresh' => '$refresh','RequestBook.{room.id}'=>'$refresh'])]
 
-    public function bookRoom(){
+    /**
+     * listen for events
+     * @return void
+     */
+    #[On(['refresh' => '$refresh', 'RequestBook.{room.id}' => '$refresh'])]
+
+    public function bookRoom()
+    {
         Request::create([
             'room_id' => $this->room->id,
             'user_id' => auth()->user()->id,
@@ -31,19 +36,23 @@ class BookRoom extends Component
         $this->roomStatus = $this->room->status;
         $this->buttonVisible = false;
         $this->alert('success', 'book request sent');
-        $this->dispatch('roomBooked',room_id:$this->room);
+        $this->dispatch('roomBooked', room_id: $this->room);
         $this->dispatch('refresh');
 
 
     }
 
 
-
+    /**
+     * set room status variable
+     * @return void
+     */
     public function mount()
     {
         $this->roomStatus = $this->room->status;
 
     }
+
     public function render()
     {
         return view('livewire.book-room');
